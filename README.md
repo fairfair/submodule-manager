@@ -36,7 +36,7 @@ Ou
     <tr>
         <th>scriptExecution</th>
         <td>
-            Si auto, les scripts d'installation (des dépendences) seront automatiquement installé, si manuel, cela vous sera demandé pour chaque dépendence, si none, aucun script n'est exécuté.
+            Si auto, les scripts d'installation (des dépendences) seront automatiquement installées, si manuel, cela vous sera demandé pour chaque dépendence, si none, aucun script n'est exécuté.
         </td>
     </tr>
     <tr>
