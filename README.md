@@ -84,4 +84,4 @@ De la même manière, si votre projet contient des dépendences (sub module), vo
 
 Le client en sera informé.
 
-Pour information, ces deux fichiers sont supprimés après l'installation.
+Pour information, le install.sh sera supprimé après l'installation.

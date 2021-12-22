@@ -17,4 +17,6 @@ if [ -f "$SCRIPT_PATH" ]; then
         source "$SCRIPT_PATH" "${BASE_DIR}${TARGET}"
     fi
 
+    rm "$SCRIPT_PATH"
+
 fi
