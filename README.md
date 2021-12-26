@@ -49,22 +49,33 @@ Puis lancez
 
 ```shell script
 ./submodule --install
+./submodule -i
 ```
 
 De la même manière, si vous ajoutez une dépendence ou modifiez une version, lancez
 
 ```shell script
 ./submodule --update
+./submodule -u
 ```  
 
 ### Verifiez les versions / conflits
 
 ```shell script
 ./submodule --check-dependency
+./submodule -cd
 ```  
 
 Il vous sera indiqué si des dépendences ont elles-mêmes d'autre dépendence ou qu'une version est en conflit
 
+### Modifier les sources d'un sous module
+
+```shell script
+./submodule --modify {name}
+./submodule -m {name}
+```  
+
+Cette commande vous permet de vous attacher au dépot distant pour modifier le code source de votre dépendence
 
 ### Créer une dépendence
 
