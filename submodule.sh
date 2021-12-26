@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source "./.submodule/logger/logger.sh"
+
 if [ ! -f "submodule.lock" ]; then
     echo "{}" > submodule.lock
 fi

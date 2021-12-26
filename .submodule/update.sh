@@ -12,25 +12,29 @@ for ((i = 0; i < $(jq '. | length' <<<$CONFIG); i++)); do
     SCRIPT_EXECUTION="$(jq -r .[$i].scriptExecution <<<$CONFIG)"
 
     if [ "$(jq -r .$NAME <<<$LOCK)" != "null" ]; then
-        if [ "$(jq -r .$NAME.tag <<<$LOCK)" == "$TAG" ]; then
+        if [ "$TAG" != "SNAPSHOT" ] && [ "$(jq -r .$NAME.tag <<<$LOCK)" == "$TAG" ]; then
             continue
         fi
 
-        source "$BASE_DIR/.submodule/logger/info.sh" "Removing of $TARGET ..."
+        info "Deletion of $NAME..."
         rm -Rf "${BASE_DIR}${TARGET}"
     fi
 
-    git clone "$REPOSITORY" "${BASE_DIR}${TARGET}"
+    info "Installation of $NAME..."
+    git clone --quiet "$REPOSITORY" "${BASE_DIR}${TARGET}"
 
     if [ "$?" != "0" ]; then
-        source "$BASE_DIR/.submodule/logger/error.sh" "This repository doesn't seem to exist"
-        source "$BASE_DIR/.submodule/logger/error.sh" "Skipping..."
+        error "This repository doesn't seem to exist"
+        error "Skipping..."
         continue
     fi
 
     cd "${BASE_DIR}${TARGET}"
     git fetch --all
-    git -c advice.detachedHead=false checkout "tags/$TAG"
+
+    if [ "$TAG" != "SNAPSHOT" ]; then
+        git -c advice.detachedHead=false checkout "tags/$TAG"
+    fi
 
     if [ "$?" != "0" ]; then
         source "$BASE_DIR/.submodule/logger/error.sh" "Tag doesn't seem to exist"
@@ -52,7 +56,7 @@ for ((i = 0; i < $(jq '. | length' <<<$CONFIG); i++)); do
 
     source "${BASE_DIR}/.submodule/dependency.sh" "${BASE_DIR}${TARGET}"
 
-    source "$BASE_DIR/.submodule/logger/success.sh" "The repository has been successfully updated"
+    success "The repository $NAME has been successfully updated"
 done
 
 echo "$LOCK" > "$PWD/submodule.lock"
