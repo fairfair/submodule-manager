@@ -11,7 +11,7 @@ Dans le submodule.json
     {
         "name": "Container",
         "repository": "git@github.com:romainlavabre/spring-starter-container.git",
-        "tag": "1.0.0",
+        "tag": "1.[0-9]*.[0-9]*",
         "scriptExecution": "auto|manual|none",
         "target": "/src/main/java/com/replace/replace/api/container"
     }
@@ -31,7 +31,7 @@ Ou
     </tr>
     <tr>
         <th>tag</th>
-        <td>La version cible de votre dépendence</td>
+        <td>La version cible de votre dépendence, peut être une regex</td>
     </tr>
     <tr>
         <th>scriptExecution</th>
